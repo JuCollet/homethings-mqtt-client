@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  web:
+    image: homethings-mqtt-client:0.0.0
+    environment:
+      MQTT_BROKER_HOST: ${MQTT_BROKER_HOST}
+      MQTT_USER_NAME: ${MQTT_USER_NAME}
+      ROLLBAR_TOKEN: ${ROLLBAR_TOKEN}
+      ROLLBAR_ENV: ${ROLLBAR_ENV}
+      MQTT_TOKEN: ${MQTT_TOKEN}
+      API_BASE_URL: ${API_BASE_URL}
+    restart: always
+    build:
+      context: ./
+    command: /dist
+    networks:
+      - homethings
+
+networks:
+  homethings:

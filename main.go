@@ -12,8 +12,7 @@ func main() {
 	internal.FetchDevicesDataTypes()
 
 	devices := internal.GetDevices()
-	client := mqtt.Init(devices)
-	mqtt.ListenForDevices(client)
+	mqtt.Init(devices)
 
 	select {}
 

@@ -3,7 +3,6 @@ module home-things
 go 1.18
 
 require (
-	github.com/confluentinc/confluent-kafka-go/v2 v2.3.0
 	github.com/eclipse/paho.mqtt.golang v1.4.2
 	github.com/joho/godotenv v1.5.1
 	golang.org/x/exp v0.0.0-20230307190834-24139beb5833

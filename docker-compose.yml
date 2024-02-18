@@ -1,12 +1,10 @@
 version: '3.8'
 services:
   web:
-    image: homethings-mqtt-client:0.0.0
+    image: ${DOCKER_USER}/${REPO_NAME}:${TAG}
     environment:
       MQTT_BROKER_HOST: ${MQTT_BROKER_HOST}
       MQTT_USER_NAME: ${MQTT_USER_NAME}
-      ROLLBAR_TOKEN: ${ROLLBAR_TOKEN}
-      ROLLBAR_ENV: ${ROLLBAR_ENV}
       MQTT_TOKEN: ${MQTT_TOKEN}
       API_BASE_URL: ${API_BASE_URL}
     restart: always
@@ -14,7 +12,7 @@ services:
       context: ./
     command: /dist
     networks:
-      - homethings-api_homethings
+      - homethings-rest-api_homethings
 networks:
-  homethings-api_homethings:
+  homethings-rest-api_homethings:
     external: true

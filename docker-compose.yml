@@ -16,7 +16,7 @@ services:
       context: ./
     command: /dist
     networks:
-      - homethings-rest-api_homethings
+      - homethings-api_homethings
 networks:
-  homethings-rest-api_homethings:
+  homethings-api_homethings:
     external: true

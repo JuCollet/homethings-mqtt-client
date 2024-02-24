@@ -18,11 +18,17 @@ jobs:
         REPO_NAME: ${{ secrets.REPO_NAME }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Determine tag based on git commit
         id: set-tag
-        run: echo "TAG=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
+        run: |
+          TAG=$(git describe --tags --abbrev=0)
+          echo "TAG=${TAG}" >> $GITHUB_ENV
       - name: Check if tag is defined
-        run: exit 1
-        if: env.TAG == ''
+        run: |
+          if [ -z "$TAG" ]; then
+            exit 1
+          fi
       - name: Run docker image
         run: docker-compose up -d --build -V

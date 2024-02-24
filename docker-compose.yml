@@ -1,12 +1,16 @@
 version: '3.8'
 services:
-  web:
+  mqtt:
     image: ${DOCKER_USER}/${REPO_NAME}:${TAG}
     environment:
       MQTT_BROKER_HOST: ${MQTT_BROKER_HOST}
       MQTT_USER_NAME: ${MQTT_USER_NAME}
       MQTT_TOKEN: ${MQTT_TOKEN}
       API_BASE_URL: ${API_BASE_URL}
+      API_KEY: ${API_KEY}
+      DOCKER_USER: ${DOCKER_USER}
+      REPO_NAME: ${REPO_NAME}
+      TAG: ${TAG}
     restart: always
     build:
       context: ./

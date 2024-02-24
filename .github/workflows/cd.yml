@@ -11,10 +11,11 @@ jobs:
     env:
         MQTT_BROKER_HOST: ${{ secrets.MQTT_BROKER_HOST }}
         MQTT_USER_NAME: ${{ secrets.MQTT_USER_NAME }}
-        ROLLBAR_TOKEN: ${{ secrets.ROLLBAR_TOKEN }}
-        ROLLBAR_ENV: ${{ secrets.ROLLBAR_ENV }}
         MQTT_TOKEN: ${{ secrets.MQTT_TOKEN }}
         API_BASE_URL: ${{ secrets.API_BASE_URL }}
+        API_KEY: ${{ secrets.API_KEY }}
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+        REPO_NAME: ${{ secrets.REPO_NAME }}
     steps:
       - uses: actions/checkout@v3
       - name: Determine tag based on git commit

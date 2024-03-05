@@ -36,6 +36,7 @@ func Init(devices []services.Device) mqtt.Client {
 
 	options.OnConnectionLost = func(c mqtt.Client, err error) {
 		fmt.Println("Connection lost")
+		fmt.Println(err.Error())
 	}
 
 	client := mqtt.NewClient(options)

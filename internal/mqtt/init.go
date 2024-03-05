@@ -17,26 +17,31 @@ func Init(devices []services.Device) mqtt.Client {
 
 	options.OnConnect = func(c mqtt.Client) {
 		fmt.Println("Connected to TTN Broker")
+
+		for _, d := range devices {
+			go func(device services.Device) {
+
+				if conn := c.Subscribe(fmt.Sprintf("v3/the-home-things@ttn/devices/%v/up", device.DeviceId), 0, nil); conn.Wait() {
+					fmt.Println("Subscribed to up-messages of device", device.DeviceId)
+					if conn.Error() != nil {
+						fmt.Println(conn.Error())
+					}
+				}
+
+			}(d)
+
+		}
+
+	}
+
+	options.OnConnectionLost = func(c mqtt.Client, err error) {
+		fmt.Println("Connection lost")
 	}
 
 	client := mqtt.NewClient(options)
 
 	if conn := client.Connect(); conn.Wait() && conn.Error() != nil {
 		panic(conn.Error())
-	}
-
-	for _, d := range devices {
-		go func(device services.Device) {
-
-			if conn := client.Subscribe(fmt.Sprintf("v3/the-home-things@ttn/devices/%v/up", device.DeviceId), 0, nil); conn.Wait() {
-				fmt.Println("Subscribed to up-messages of device", device.DeviceId)
-				if conn.Error() != nil {
-					fmt.Println(conn.Error())
-				}
-			}
-
-		}(d)
-
 	}
 
 	return client

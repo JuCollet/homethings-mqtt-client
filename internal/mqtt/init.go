@@ -14,6 +14,7 @@ func Init(devices []services.Device) mqtt.Client {
 	options.SetPassword(os.Getenv("MQTT_TOKEN"))
 	options.SetDefaultPublishHandler(MessageHandler)
 	options.AutoReconnect = true
+	options.ClientID = "homethings-mqtt-client"
 
 	options.OnConnect = func(c mqtt.Client) {
 		fmt.Println("Connected to TTN Broker")
